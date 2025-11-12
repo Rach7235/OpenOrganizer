@@ -44,6 +44,7 @@ export function convertFolderTreetoQTree(folders: UIFolder[], notes: UINote[], r
       const itemIDBig = note.itemID;
       return {
         label: note.title,
+        icon: 'note',
         id: -itemIDBig, // Use negative bigint to distinguish notes and reminders from folders
       };
     });
@@ -56,6 +57,7 @@ export function convertFolderTreetoQTree(folders: UIFolder[], notes: UINote[], r
       const itemIDBig = reminder.itemID;
       return {
         label: reminder.title,
+        icon: 'alarm',
         id: -itemIDBig,
       };
     });
@@ -87,12 +89,14 @@ export function buildRootNodes(folders: UIFolder[],notes: UINote[], reminders: U
   const rootNoteNodes = notes.filter(note => note.isSaved && note.folderID === 0n).
   map(note => ({
     label: note.title,
+    icon: 'note',
     id: -note.itemID,
   }));
 
   const reminderRootNodes = reminders.filter(reminder => reminder.isSaved && reminder.folderID === 0n).
   map(reminder => ({
     label: reminder.title,
+    icon: 'alarm',
     id: -reminder.itemID,
   }));
 
